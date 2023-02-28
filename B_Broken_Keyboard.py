@@ -1,15 +1,18 @@
-t = int(input())
-
-for _ in range(t):
-    s = input().strip()
-    freq = [0] * 26
-    
-    for c in s:
-        freq[ord(c) - ord('a')] += 1
-    
-    res = ''
-    for i in range(26):
-        if freq[i] % 2 == 0:
-            res += chr(i + ord('a'))
-    
-    print(res)
+tests = int(input())
+for _ in range(tests):
+    string = input()
+    size = len(string)
+    left = 0
+    answer = set()
+    while left < size:
+        right = left + 1
+        count = 1
+        while right < size and string[right] == string[right - 1]:
+            count += 1
+            right += 1
+            left += 1
+        if count % 2 == 1 and string[left] not in answer:
+            answer.add(string[left])
+        left += 1
+    answer = list(answer)
+    print("".join(sorted(answer)))

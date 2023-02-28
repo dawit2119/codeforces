@@ -1,8 +1,31 @@
-input_size = int(input())
-input_array = list(map(int, input().split()))
-segments = []
-swaps = 0
-for i in range(input_size):
-    for j in range(input_size-i-j):
-        if input_array[j] > input_array[j+1]:
-            swaps += 1
+from math import inf
+
+
+n = int(input())
+
+array = list(map(int, input().split()))
+sorted_array = sorted(array)
+
+start, end = inf, -inf
+
+for idx in range(n):
+    if array[idx] != sorted_array[idx]:
+        start = min(start, idx)
+        end = idx
+
+if start == inf:
+    print("yes")
+    print(1, 1)
+else:
+    i, j = start, end
+
+    while i <= end:
+        if array[i] != sorted_array[j]:
+            print("no")
+            exit()
+
+        i += 1
+        j -= 1
+
+    print("yes")
+    print(start + 1, end + 1)
